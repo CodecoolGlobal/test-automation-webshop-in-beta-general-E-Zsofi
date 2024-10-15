@@ -24,6 +24,7 @@ public class CheckoutPage extends BasePom {
     private final By price = By.cssSelector("[data-test='inventory-item-price']");
     private final By totalCalculation = By.cssSelector(".summary_subtotal_label");
     private final By finishButton = By.id("finish");
+    private final By backToButton = By.id("back-to-products");
     
     
     
@@ -67,4 +68,11 @@ public class CheckoutPage extends BasePom {
         WebElement finish = wait.until(ExpectedConditions.elementToBeClickable(finishButton));
         finish.click();
     }
+    
+    public void clickBackToButton(){
+        WebElement backTo = wait.until(ExpectedConditions.elementToBeClickable(backToButton));
+        backTo.click();
+    }
+    
+    
 }
