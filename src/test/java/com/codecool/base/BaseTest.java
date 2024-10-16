@@ -7,7 +7,7 @@ import org.openqa.selenium.chrome.ChromeOptions;
 
 
     public abstract class BaseTest {
-        private final String SUT = "https://www.saucedemo.com/";
+        protected final String SUT = "https://www.saucedemo.com/";
         protected WebDriver driver;
 
         public void setUp() {
