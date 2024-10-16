@@ -1,35 +1,33 @@
 package com.codecool.test;
 
+import com.codecool.base.BaseTest;
 import com.codecool.pages.HomePage;
 import com.codecool.pages.ItemComponent;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.time.Duration;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-public class HomePageTest {
+public class HomePageTest extends BaseTest {
 
-    private WebDriver driver;
     private HomePage homePage;
+    private WebDriverWait wait;
 
     @BeforeEach
     public void setUp() {
-        System.setProperty("webdriver.chrome.driver", "path/to/chromedriver");
-        driver = new ChromeDriver();
-        driver.get("https://www.saucedemo.com/");
-        homePage = new HomePage(driver);
+        super.setUp();
+        wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        homePage = new HomePage(driver, wait);
     }
 
     @AfterEach
     public void tearDown() {
-        if (driver != null) {
-            driver.quit();
-        }
+        super.tearDown();
     }
 
     @Test
@@ -50,7 +48,4 @@ public class HomePageTest {
         ItemComponent product = homePage.getProductByName("Non-existent Product");
         assertNull(product, "The product should not be found");
     }
-
-
 }
-

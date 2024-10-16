@@ -1,6 +1,6 @@
 package com.codecool.pages;
 
-
+import com.codecool.base.BasePom;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -11,18 +11,14 @@ import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
 
-public class HomePage {
+public class HomePage extends BasePom {
 
-    private WebDriver driver;
-    private WebDriverWait wait;
-
-    public HomePage(WebDriver driver) {
-        this.driver = driver;
-        this.wait = new WebDriverWait(driver, Duration.ofSeconds(10)); // 10 másodperces várakozás
+    public HomePage(WebDriver driver, WebDriverWait wait) {
+        super(driver, wait);
     }
 
     public List<ItemComponent> getProducts() {
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.className("inventory_item"))); // Várakozás, hogy az első termék megjelenjen
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.className("inventory_item")));
         List<ItemComponent> products = new ArrayList<>();
         List<WebElement> productElements = driver.findElements(By.className("inventory_item"));
         for (WebElement productElement : productElements) {
@@ -40,4 +36,3 @@ public class HomePage {
         return null;
     }
 }
-
