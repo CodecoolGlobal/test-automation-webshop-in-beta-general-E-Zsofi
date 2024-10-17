@@ -5,12 +5,15 @@ import com.codecool.pages.HomePage;
 import com.codecool.pages.ItemComponent;
 import com.codecool.pages.LoginPage;
 import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -65,12 +68,66 @@ public class HomePageTest extends BaseTest {
     public void testRemoveProduct() {
         ItemComponent product = homePage.getProductByName("Sauce Labs Backpack");
         product.clickAddToCartButton();
-
+        product.clickRemoveFromCartButton();
+        assertTrue(homePage.isCartEmpty(), "The cart should be empty");
     }
 
     @Test
     public void testEmptyCart() {
         assertTrue(homePage.isCartEmpty());
     }
+
+    @Test
+    public void testSortByNameZA() {
+        homePage.sortProductsBy("za");
+        List<String> productNames = homePage.getProductNames()
+                .stream()
+                .map(WebElement::getText)
+                .collect(Collectors.toList());
+        List<String> sortedNames = productNames.stream()
+                .sorted((a, b) -> b.compareTo(a))
+                .collect(Collectors.toList());
+        assertEquals(sortedNames, productNames, "Products are not sorted Z-A");
+    }
+
+    @Test
+    public void testSortByNameAZ() {
+        homePage.sortProductsBy("az");
+        List<String> productNames = homePage.getProductNames()
+                .stream()
+                .map(WebElement::getText)
+                .collect(Collectors.toList());
+        List<String> sortedNames = productNames.stream()
+                .sorted()
+                .collect(Collectors.toList());
+        assertEquals(sortedNames, productNames, "Products are not sorted A-Z");
+    }
+
+    @Test
+    public void testSortByPriceLowToHigh() {
+        homePage.sortProductsBy("lohi");
+        List<Double> productPrices = homePage.getProductPrices()
+                .stream()
+                .map(e -> Double.parseDouble(e.getText().replace("$", "")))
+                .collect(Collectors.toList());
+        List<Double> sortedPrices = productPrices.stream()
+                .sorted()
+                .collect(Collectors.toList());
+        assertEquals(sortedPrices, productPrices, "Products are not sorted by price low to high");
+    }
+
+    @Test
+    public void testSortByPriceHighToLow() {
+        homePage.sortProductsBy("hilo");
+        List<Double> productPrices = homePage.getProductPrices()
+                .stream()
+                .map(e -> Double.parseDouble(e.getText().replace("$", "")))
+                .collect(Collectors.toList());
+        List<Double> sortedPrices = productPrices.stream()
+                .sorted((a, b) -> b.compareTo(a))  // Reverse order
+                .collect(Collectors.toList());
+        assertEquals(sortedPrices, productPrices, "Products are not sorted by price high to low");
+    }
+
 
 }
