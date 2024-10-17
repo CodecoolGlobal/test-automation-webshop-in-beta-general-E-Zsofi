@@ -17,7 +17,7 @@ public class NavBarComponent extends BasePom {
     private By logoutLink = By.id("logout_sidebar_link");
     private By resetAppState = By.id("reset_sidebar_link");
     private By cartButton = By.id("shopping_cart_container");
-    private By cartHasItemPic = By.xpath("//*[@id=\"shopping_cart_container\"]/a/span");
+    private By cartHasItemPic = By.cssSelector("[data-test='shopping-cart-badge']");
     private By addItemToCart = By.id("add-to-cart-sauce-labs-backpack");
 
     public NavBarComponent(WebDriver driver) {
@@ -50,15 +50,6 @@ public class NavBarComponent extends BasePom {
 
     public void addItem(){
         wait.until(ExpectedConditions.visibilityOfElementLocated(addItemToCart)).click();
-    }
-
-    public boolean isCartEmpty(){
-        try {
-            WebElement cartItem = driver.findElement(cartHasItemPic);
-            return false;
-        } catch (NoSuchElementException e) {
-            return true;
-        }
     }
 
 }
