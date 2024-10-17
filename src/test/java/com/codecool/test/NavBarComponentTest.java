@@ -1,6 +1,7 @@
 package com.codecool.test;
 
 import com.codecool.base.BaseTest;
+import com.codecool.pages.HomePage;
 import com.codecool.pages.LoginPage;
 import com.codecool.pages.NavBarComponent;
 import org.junit.jupiter.api.AfterEach;
@@ -12,11 +13,13 @@ import org.junit.jupiter.api.Test;
 public class NavBarComponentTest extends BaseTest {
     private NavBarComponent navBarComponent;
     private LoginPage loginPage;
+    private HomePage homePage;
 
     @BeforeEach
     public void setUpProject() {
         setUp();
         loginPage = new LoginPage(driver);
+        homePage = new HomePage(driver, wait);
         loginPage.login("standard_user", "secret_sauce");
         navBarComponent = new NavBarComponent(driver);
     }
@@ -27,31 +30,32 @@ public class NavBarComponentTest extends BaseTest {
     }
 
     @Test
-    void allItemsListed(){
+    public void testAllItemsListed(){
         navBarComponent.clickOnBurgerButton();
         navBarComponent.clickOnAllItemsLink();
         Assertions.assertEquals(SUT + "inventory.html", driver.getCurrentUrl());
     }
 
     @Test
-    void showAboutPage(){
+    public void testShowAboutPage(){
         navBarComponent.clickOnBurgerButton();
         navBarComponent.clickOnAboutLink();
         Assertions.assertEquals("https://saucelabs.com/", driver.getCurrentUrl());
     }
 
     @Test
-    void directToLogoutPage(){
+    public void testDirectToLogoutPage(){
         navBarComponent.clickOnBurgerButton();
         navBarComponent.clickOnLogoutLink();
         Assertions.assertEquals("https://www.saucedemo.com/", driver.getCurrentUrl());
     }
 
-/*    @Test
-    void resetAppClearsTheCart(){
+    @Test
+    public void testResetAppClearsTheCart(){
         navBarComponent.addItem();
         navBarComponent.clickOnBurgerButton();
         navBarComponent.clickOnResetAppStateLink();
-
-    }*/
+        boolean result = homePage.isCartEmpty();
+        Assertions.assertTrue(result);
+    }
 }

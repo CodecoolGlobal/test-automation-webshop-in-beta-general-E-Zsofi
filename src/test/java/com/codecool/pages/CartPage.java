@@ -9,33 +9,42 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.NoSuchElementException;
 
 public class CartPage extends BasePom {
     public CartPage(WebDriver driver, WebDriverWait wait) {
         super(driver, wait);
     }
 
-    private final By shoppingCartIcon = By.id("shopping_cart_container");
     private final By continueShoppingButton = By.id("continue-shopping");
     private final By checkoutButton = By.id("checkout");
+    private final By removeItem = By.id("remove-sauce-labs-backpack");
 
 
-    public void clickOnShoppingCartIcon(){
-        wait.until(ExpectedConditions.visibilityOfElementLocated(shoppingCartIcon)).click();
-    }
-
-    public List<ItemComponent> getProductsInTheCart() {
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.className("inventory_item")));
-        List<ItemComponent> products = new ArrayList<>();
-        List<WebElement> productElements = driver.findElements(By.className("inventory_item"));
-        for (WebElement productElement : productElements) {
-            products.add(new ItemComponent(driver, productElement));
+    public List<String> getProductNamesInTheCart() {
+        try {
+            List<String> products = new ArrayList<>();
+            List<WebElement> productElements = driver.findElements(By.className("cart_item"));
+            for (WebElement productElement : productElements) {
+                products.add(new ItemComponent(driver, productElement).getProductName());
+            }
+            return products;
+        } catch (NoSuchElementException e) {
+            return new ArrayList<String>();
         }
-        return products;
+
     }
 
-    public void continueShopping(){
+    public void clickOnContinueShopping(){
         wait.until(ExpectedConditions.visibilityOfElementLocated(continueShoppingButton)).click();
+    }
+
+    public void clickOnCheckout(){
+        wait.until(ExpectedConditions.visibilityOfElementLocated(checkoutButton)).click();
+    }
+
+    public void removeItemFromCart(){
+        wait.until(ExpectedConditions.visibilityOfElementLocated(removeItem)).click();
     }
 
 

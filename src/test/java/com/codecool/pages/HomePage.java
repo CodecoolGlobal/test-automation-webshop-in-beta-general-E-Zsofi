@@ -18,6 +18,8 @@ public class HomePage extends BasePom {
         super(driver, wait);
     }
 
+    private By cartIcon = By.id("shopping_cart_container");
+
     public List<ItemComponent> getProducts() {
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.className("inventory_item")));
         List<ItemComponent> products = new ArrayList<>();
@@ -27,6 +29,17 @@ public class HomePage extends BasePom {
         }
         return products;
     }
+
+    public List<String> getProductNames() {
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.className("inventory_item")));
+        List<String> products = new ArrayList<>();
+        List<WebElement> productElements = driver.findElements(By.className("inventory_item"));
+        for (WebElement productElement : productElements) {
+            products.add(new ItemComponent(driver, productElement).getProductName());
+        }
+        return products;
+    }
+
 
     public ItemComponent getProductByName(String productName) {
         for (ItemComponent product : getProducts()) {
@@ -45,6 +58,10 @@ public class HomePage extends BasePom {
             return true;
         }
     }
+
+public void clickOnCartIcon(){
+        wait.until(ExpectedConditions.visibilityOfElementLocated(cartIcon)).click();
+}
 
 
     public String checkProductPrice(ItemComponent product) {
