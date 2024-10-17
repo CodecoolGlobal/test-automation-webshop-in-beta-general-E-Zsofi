@@ -2,14 +2,15 @@ package com.codecool.pages;
 
 import com.codecool.base.BasePom;
 import org.openqa.selenium.By;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
+
 
 public class HomePage extends BasePom {
 
@@ -34,5 +35,19 @@ public class HomePage extends BasePom {
             }
         }
         return null;
+    }
+
+    public boolean isCartEmpty() {
+        try {
+            WebElement cartBadge = driver.findElement(By.className("shopping_cart_badge"));
+            return false;
+        } catch (NoSuchElementException e) {
+            return true;
+        }
+    }
+
+
+    public String checkProductPrice(ItemComponent product) {
+        return product.getProductPrice();
     }
 }

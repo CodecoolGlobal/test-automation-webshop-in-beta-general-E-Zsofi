@@ -21,6 +21,9 @@ public class LoginPage extends BasePom {
     @FindBy(id = "login-button")
     private WebElement loginButton;
 
+    @FindBy(className = "error-message-container")
+    private WebElement errorMessage;
+
     public LoginPage(WebDriver driver) {
         super(driver, new WebDriverWait(driver, Duration.ofSeconds(5)));
         PageFactory.initElements(driver, this);
@@ -37,5 +40,40 @@ public class LoginPage extends BasePom {
         passwordInputField.sendKeys(password);
         waitForElement(loginButton);
         loginButton.click();
+    }
+
+    public boolean checkLoginSuccess() {
+        return driver.getPageSource().contains("Logout");
+    }
+
+    private void enterPassword(String password) {
+        waitForElement(passwordInputField);
+        passwordInputField.sendKeys(password);
+    }
+
+    private void enterUsername(String username) {
+        waitForElement(usernameInputField);
+        usernameInputField.sendKeys(username);
+    }
+
+    public String getErrorMessage() {
+        WebElement error = wait.until(ExpectedConditions.visibilityOf(errorMessage));
+        return error.getText();
+    }
+
+    public void clickLoginButton() {
+        waitForElement(loginButton);
+        loginButton.click();
+    }
+
+    public void enterCredentials(String credentialType, String credential) {
+        switch (credentialType) {
+            case "password":
+                enterPassword(credential);
+                break;
+            case "username":
+                enterUsername(credential);
+                break;
+        }
     }
 }
