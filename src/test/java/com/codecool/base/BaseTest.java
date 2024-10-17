@@ -4,11 +4,15 @@ import io.github.cdimascio.dotenv.Dotenv;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
+import java.time.Duration;
 
 
-    public abstract class BaseTest {
+ public abstract class BaseTest {
         protected final String SUT = "https://www.saucedemo.com/";
         protected WebDriver driver;
+        protected WebDriverWait wait;
 
         public void setUp() {
             ChromeOptions options = new ChromeOptions();
@@ -16,6 +20,7 @@ import org.openqa.selenium.chrome.ChromeOptions;
             driver = new ChromeDriver(options);
             driver.manage().window().maximize();
             driver.get(SUT);
+            wait = new WebDriverWait(driver, Duration.ofSeconds(5));
         }
 
         public void tearDown() {
