@@ -6,6 +6,7 @@ import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.ArrayList;
@@ -28,6 +29,22 @@ public class HomePage extends BasePom {
         return products;
     }
 
+    public void sortProductsBy(String sortOptionValue) {
+        WebElement sorter = driver.findElement(By.className("product_sort_container"));
+        Select select = new Select(sorter);
+        select.selectByValue(sortOptionValue);  // Sorting by the given value
+    }
+
+    public List<WebElement> getProductNames() {
+        return driver.findElements(By.className("inventory_item_name")); // Return product names
+    }
+
+    public List<WebElement> getProductPrices() {
+        return driver.findElements(By.className("inventory_item_price")); // Return product prices
+    }
+
+
+
     public ItemComponent getProductByName(String productName) {
         for (ItemComponent product : getProducts()) {
             if (product.getProductName().equalsIgnoreCase(productName)) {
@@ -45,6 +62,7 @@ public class HomePage extends BasePom {
             return true;
         }
     }
+
 
 
     public String checkProductPrice(ItemComponent product) {

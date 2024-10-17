@@ -26,4 +26,9 @@ public class ItemComponent {
         WebElement addToCartButton = itemElement.findElement(By.tagName("button"));
         addToCartButton.click();
     }
+
+    public void clickRemoveFromCartButton() {
+        WebElement removeFromCartButton = itemElement.findElement(By.tagName("button"));
+        removeFromCartButton.click();
+    }
 }
