@@ -1,6 +1,5 @@
 package com.codecool.base;
 
-import io.github.cdimascio.dotenv.Dotenv;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -9,8 +8,8 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import java.time.Duration;
 
 
-public abstract class BaseTest {
-        private final String SUT = "https://www.saucedemo.com/";
+ public abstract class BaseTest {
+        protected final String SUT = "https://www.saucedemo.com/";
         protected WebDriver driver;
         protected WebDriverWait wait;
 

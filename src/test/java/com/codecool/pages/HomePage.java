@@ -19,6 +19,8 @@ public class HomePage extends BasePom {
         super(driver, wait);
     }
 
+    private By cartIcon = By.id("shopping_cart_container");
+
     public List<ItemComponent> getProducts() {
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.className("inventory_item")));
         List<ItemComponent> products = new ArrayList<>();
@@ -44,7 +46,6 @@ public class HomePage extends BasePom {
     }
 
 
-
     public ItemComponent getProductByName(String productName) {
         for (ItemComponent product : getProducts()) {
             if (product.getProductName().equalsIgnoreCase(productName)) {
@@ -62,6 +63,10 @@ public class HomePage extends BasePom {
             return true;
         }
     }
+
+public void clickOnCartIcon(){
+        wait.until(ExpectedConditions.visibilityOfElementLocated(cartIcon)).click();
+}
 
 
 
