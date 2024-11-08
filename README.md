@@ -28,7 +28,7 @@ To get started with the project, follow these steps:
 1. **Clone the repository:**
 
    ```bash
-   git clone https://github.com/your-repository/webshop-in-beta.git
+   git clone https://github.com/CodecoolGlobal/test-automation-webshop-in-beta-general-E-Zsofi
    ```
    ```bash
     cd webshop-in-beta
