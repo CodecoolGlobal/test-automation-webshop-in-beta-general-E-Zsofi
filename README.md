@@ -31,7 +31,7 @@ To get started with the project, follow these steps:
    git clone https://github.com/CodecoolGlobal/test-automation-webshop-in-beta-general-E-Zsofi
    ```
    ```bash
-    cd webshop-in-beta
+    cd  test-automation-webshop-in-beta-general-E-Zsofi
    ```
 
 
