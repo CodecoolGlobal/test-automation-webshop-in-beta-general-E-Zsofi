@@ -50,3 +50,16 @@ mvn install
 mvn test
 ```
 The tests will execute, and results will be displayed in the terminal.
+
+## Test Scenarios
+The automated tests in this project simulate user interactions with the SauceDemo webshop, covering:
+
+1. **Login:**
+Verify that the user can log in with valid credentials from the CSV file.
+
+2. **Product Browsing:**
+Ensure the user can browse and view products.
+3. **Add to Cart:**
+Test that items can be added to the shopping cart.
+4. **Checkout:**
+Validate the process of proceeding to checkout and completing the purchase.
