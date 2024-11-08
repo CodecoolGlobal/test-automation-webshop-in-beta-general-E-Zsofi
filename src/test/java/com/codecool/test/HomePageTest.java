@@ -129,5 +129,11 @@ public class HomePageTest extends BaseTest {
         assertEquals(sortedPrices, productPrices, "Products are not sorted by price high to low");
     }
 
+    @Test
+    public  void  testClickTheCartIcon() {
+        homePage.clickOnCartIcon();
+        Assertions.assertEquals(SUT + "cart.html", driver.getCurrentUrl());
+    }
+
 
 }

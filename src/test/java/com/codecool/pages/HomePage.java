@@ -68,9 +68,4 @@ public void clickOnCartIcon(){
         wait.until(ExpectedConditions.visibilityOfElementLocated(cartIcon)).click();
 }
 
-
-
-    public String checkProductPrice(ItemComponent product) {
-        return product.getProductPrice();
-    }
 }
