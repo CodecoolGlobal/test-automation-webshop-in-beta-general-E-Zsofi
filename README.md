@@ -1,5 +1,13 @@
 # Webshop-in-Beta - Automated Testing Project
 
+<br />
+<div align="center">
+<a href="https://github.com/CodecoolGlobal/test-automation-webshop-in-beta-general-E-Zsofi">
+<img src="src\test\resources\images\shop.PNG" alt="Logo" >
+ </a>
+</div>
+
+
 ## Overview
 
 This project is an automated testing setup for the **SauceDemo** webshop (https://www.saucedemo.com/). The purpose of this repository is to verify the functionality of the webshop using Selenium WebDriver and JUnit 5. The tests cover basic user interactions such as browsing products, adding them to the shopping cart, and completing a checkout process.
